@@ -1,6 +1,10 @@
 //const msal = require('@azure/msal-node');
-const jwt = require('jsonwebtoken')
-const jwksClient = require('jwks-rsa');
+// const jwt = require('jsonwebtoken');
+// const jwksClient = require('jwks-rsa');
+
+import jwt from 'jsonwebtoken';
+import jwksClient from 'jwks-rsa';
+
 // require('isomorphic-fetch'); // required for graph library and SharePoint calls
 // const Graph = require('@microsoft/microsoft-graph-client');
 //const { getGraphToken } = require('../utils/auth.js');

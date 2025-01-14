@@ -28,8 +28,7 @@ export default class RaaS {
         body: JSON.stringify(containerRequestData),
       };
 
-      const response = await fetch(`/api/httptrigger1`);
-      console.log(response);
+      
       console.log("Creating Container with options: " + JSON.stringify(containerRequestOptions));
       const res = await fetch(apiUrl, containerRequestOptions);
       if (res.ok) {
@@ -54,6 +53,10 @@ export default class RaaS {
         method: 'GET',
         headers: containerRequestHeaders
       };
+
+      const response = await fetch(`/api/httptrigger1`);
+      console.log(response);
+
       const res = await fetch(apiUrl, containerRequestOptions);
       if (res.ok) {
         const containers = await res.json();

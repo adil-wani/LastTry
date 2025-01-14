@@ -117,9 +117,9 @@ module.exports = async function (context, req) {
 
         // Return the error to the consumer
         context.res = {
-            status: 500,
+            status: 200,
             body: {
-                message: 'An unexpected error occurred.',
+                message: `An unexpected error occurred. ${error.message}`,
                 details: error.message
             }
         };

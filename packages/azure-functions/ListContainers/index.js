@@ -59,63 +59,60 @@ const getSigningKeys = (header, callback) => {
 }
 
 module.exports = async function (context, req) {
-
-    
-    if (!req.headers.authorization) {
-        context.res = {
-            status: 401,
-            body: 'No access token provided'
-        };
-        return;
-    }
-
-   
-    const [bearer, token] = req.headers.authorization.split(' ');
-    console.log('token: '+token);
-
-    
-
-
-
-    /*
-    if (!isJwtValid(token)) {
-        context.res = {
-            status: 403,
-            body: 'Provided access token is invalid'
-        };
-        return;
-    }
-    */
-
-    // Get Graph Token
-    const [graphSuccess, graphTokenResponse] = await getGraphToken(cca, token);
-    if (!graphSuccess) {
-        context.res = graphTokenResponse
-        return;
-    }
-
-    const authProvider = (callback) => {
-        callback(null, graphTokenResponse);
-    };
-
-    let options = {
-        authProvider,
-        defaultVersion: 'beta'
-    }
-    
     try {
+        // Check if the Authorization header is present
+        if (!req.headers.authorization) {
+            context.log.error('No access token provided');
+            context.res = {
+                status: 401,
+                body: 'No access token provided'
+            };
+            return;
+        }
+
+        // Extract bearer token
+        const [bearer, token] = req.headers.authorization.split(' ');
+        context.log('Token received:', token);
+
+        // Get Graph Token
+        const [graphSuccess, graphTokenResponse] = await getGraphToken(cca, token);
+        if (!graphSuccess) {
+            context.log.error('Failed to retrieve Graph token');
+            context.res = graphTokenResponse;
+            return;
+        }
+
+        // Set up Graph client options
+        const authProvider = (callback) => {
+            callback(null, graphTokenResponse);
+        };
+
+        let options = {
+            authProvider,
+            defaultVersion: 'beta'
+        };
+
+        // Call Microsoft Graph API
         const graph = Graph.Client.init(options);
-        res = await graph.api(`storage/fileStorage/containers?$filter=containerTypeId eq ${process.env["APP_CONTAINER_TYPE_ID"]}`).get();
+        const res = await graph
+            .api(`storage/fileStorage/containers?$filter=containerTypeId eq ${process.env["APP_CONTAINER_TYPE_ID"]}`)
+            .get();
+
+        // Return successful response
         context.res = {
             body: res
         };
-        return;
-    }
-    catch (error) {
+    } catch (error) {
+        // Log the error
+        context.log.error('An error occurred:', error);
+
+        // Propagate the error to the consumer
         context.res = {
             status: 500,
-            body: 'Failed to list containers: ' + error
+            body: {
+                message: 'An unexpected error occurred',
+                details: error.message
+            }
         };
-        return;
     }
-}
+};

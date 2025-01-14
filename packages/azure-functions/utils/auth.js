@@ -1,10 +1,10 @@
-const msal = require('@azure/msal-node');
-const jwt = require('jsonwebtoken')
-const jwksClient = require('jwks-rsa');
-require('isomorphic-fetch'); // required for graph library and sharePoint calls
-const Graph = require('@microsoft/microsoft-graph-client');
+import { ConfidentialClientApplication } from '@azure/msal-node';
+import jwt from 'jsonwebtoken';
+import jwksClient from 'jwks-rsa';
+import 'isomorphic-fetch';
+import { Client as GraphClient } from '@microsoft/microsoft-graph-client';
 
-async function getGraphToken(cca, token) {
+export async function getGraphToken(cca, token) {
     try {
         const graphTokenRequest = {
             oboAssertion: token,
@@ -23,5 +23,3 @@ async function getGraphToken(cca, token) {
         return [false, errorResult];
     }
 }
-
-module.exports = { getGraphToken };

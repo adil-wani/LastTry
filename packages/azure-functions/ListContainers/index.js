@@ -7,6 +7,8 @@ const Graph = require('@microsoft/microsoft-graph-client');
 
 const { getGraphToken } = require('../utils/auth.js');
 
+
+
 const DISCOVERY_KEYS_ENDPOINT = process.env["DISCOVERY_KEYS_ENDPOINT"];
 const config = {
     auth: {
@@ -78,6 +80,15 @@ module.exports = async function (context, req) {
 
         // Get Graph Token
         context.log.info('Retrieving Graph token...');
+
+
+        context.res = {
+            body: "ADIL WANI",
+            status: 200
+        };
+
+      return
+
         const [graphSuccess, graphTokenResponse] = await getGraphToken(cca, token);
 
         if (!graphSuccess) {

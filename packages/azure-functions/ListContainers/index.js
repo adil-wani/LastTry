@@ -59,6 +59,8 @@ const getSigningKeys = (header, callback) => {
 }
 
 module.exports = async function (context, req) {
+
+    
     if (!req.headers.authorization) {
         context.res = {
             status: 401,
@@ -68,11 +70,10 @@ module.exports = async function (context, req) {
     }
 
    
-    //const [bearer, token] = req.headers.authorization.split(' ');
+    const [bearer, token] = req.headers.authorization.split(' ');
+    console.log('token: '+token);
 
-    const tokenx=req.headers.get('Authorization');
-    console.log('tock1: '+tokenx);
-    const [bearer, token] = tokenx.split(' ');
+    
 
 
 

@@ -8,7 +8,7 @@ module.exports = async function (context, req) {
             'Content-Type': 'application/json'
         },
         body: {
-            msg: "Hello, world!x"
+            msg: `Hello, world! - ${new Date().toISOString()}`
         }
     };
 };

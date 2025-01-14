@@ -60,9 +60,11 @@ const getSigningKeys = (header, callback) => {
 
 module.exports = async function (context, req) {
     try {
+        context.log.info('Function execution started.');
+
         // Check if the Authorization header is present
         if (!req.headers.authorization) {
-            context.log.error('No access token provided');
+            context.log.error('No access token provided.');
             context.res = {
                 status: 401,
                 body: 'No access token provided'
@@ -72,17 +74,20 @@ module.exports = async function (context, req) {
 
         // Extract bearer token
         const [bearer, token] = req.headers.authorization.split(' ');
-        context.log('Token received:', token);
+        context.log.info(`Token received: ${token}`);
 
         // Get Graph Token
+        context.log.info('Retrieving Graph token...');
         const [graphSuccess, graphTokenResponse] = await getGraphToken(cca, token);
+
         if (!graphSuccess) {
-            context.log.error('Failed to retrieve Graph token');
+            context.log.error('Failed to retrieve Graph token.');
             context.res = graphTokenResponse;
             return;
         }
 
         // Set up Graph client options
+        context.log.info('Initializing Graph client...');
         const authProvider = (callback) => {
             callback(null, graphTokenResponse);
         };
@@ -93,26 +98,31 @@ module.exports = async function (context, req) {
         };
 
         // Call Microsoft Graph API
+        context.log.info('Calling Microsoft Graph API...');
         const graph = Graph.Client.init(options);
         const res = await graph
             .api(`storage/fileStorage/containers?$filter=containerTypeId eq ${process.env["APP_CONTAINER_TYPE_ID"]}`)
             .get();
+
+        // Log success
+        context.log.info('Graph API call successful.');
 
         // Return successful response
         context.res = {
             body: res
         };
     } catch (error) {
-        // Log the error
+        // Log the error in detail
         context.log.error('An error occurred:', error);
 
-        // Propagate the error to the consumer
+        // Return the error to the consumer
         context.res = {
             status: 500,
             body: {
-                message: 'An unexpected error occurred',
+                message: 'An unexpected error occurred.',
                 details: error.message
             }
         };
     }
 };
+

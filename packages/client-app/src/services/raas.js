@@ -42,7 +42,7 @@ export default class RaaS {
   }
 
   async listContainers() {
-    const apiUrl = `${localFunctionHost}/api/ListContainers`;
+    const apiUrl = `${localFunctionHost}/api/listcontainers`;
     if (Providers.globalProvider.state === ProviderState.SignedIn) {
       const token = await this.getApiAccessToken();
       const containerRequestHeaders = {

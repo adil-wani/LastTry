@@ -54,8 +54,10 @@ export default class RaaS {
         headers: containerRequestHeaders
       };
 
-      const response = await fetch(`/api/httptrigger1`);
-      console.log(response);
+      const response = await fetch(`${localFunctionHost}/api/httptrigger1`);
+      const data = await response.json();
+      console.log(data);
+
 
       const res = await fetch(apiUrl, containerRequestOptions);
       if (res.ok) {

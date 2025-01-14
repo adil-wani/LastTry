@@ -66,7 +66,16 @@ module.exports = async function (context, req) {
         };
         return;
     }
-    const [bearer, token] = req.headers.authorization.split(' ');
+
+   
+    //const [bearer, token] = req.headers.authorization.split(' ');
+
+    const tokenx=req.headers.get('Authorization');
+    console.log('tock1: '+tokenx);
+    const [bearer, token] = tokenx.split(' ');
+
+
+
     /*
     if (!isJwtValid(token)) {
         context.res = {

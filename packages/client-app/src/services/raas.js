@@ -64,6 +64,9 @@ export default class RaaS {
         const containers = await res.json();
         return containers;
       } else {
+
+       res.json().then(data => {console.log(data)}).catch(err => console.log(err));
+
         console.error(`Unable to get containers ${res}`);
         return null;
       }

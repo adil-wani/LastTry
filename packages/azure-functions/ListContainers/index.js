@@ -1,4 +1,4 @@
-// const msal = require('@azure/msal-node');
+const msal = require('@azure/msal-node');
 // const jwt = require('jsonwebtoken')
 // const jwksClient = require('jwks-rsa');
 // require('isomorphic-fetch'); // required for graph library and SharePoint calls

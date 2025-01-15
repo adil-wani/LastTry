@@ -1,9 +1,9 @@
 {
-    "azureFunctions.deploySubpath": "packages/azure-functions",
+    "azureFunctions.deploySubpath": "packages/speazfunc",
     "azureFunctions.postDeployTask": "npm install (functions)",
     "azureFunctions.projectLanguage": "JavaScript",
     "azureFunctions.projectRuntime": "~4",
     "debug.internalConsoleOptions": "neverOpen",
-    "azureFunctions.projectSubpath": "packages/azure-functions",
+    "azureFunctions.projectSubpath": "packages/speazfunc",
     "azureFunctions.preDeployTask": "npm prune (functions)"
 }

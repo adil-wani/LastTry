@@ -168,7 +168,7 @@ export default class RaaS {
   async getApiAccessToken() {
     const msalConfig = {
       auth: {
-        clientId: process.env.REACT_APP_CLIENT_ID || 'e284a7d5-9b4d-4d5f-8343-c8e3dc079c05',
+        clientId: process.env.REACT_APP_CLIENT_ID,
         authority: `https://login.microsoftonline.com/1a96daa0-6b95-4b94-988e-72d794968773/`,
       },
       cache: {

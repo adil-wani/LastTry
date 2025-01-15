@@ -18,7 +18,7 @@ Set required Microsoft Graph scopes in global provider
 
 Providers.globalProvider = new Msal2Provider({
   clientId: process.env.REACT_APP_CLIENT_ID ,
-  authority: `https://login.microsoftonline.com/1a96daa0-6b95-4b94-988e-72d794968773/`,
+  authority: `https://login.microsoftonline.com/${process.env.REACT_APP_TENANT_ID}/`,
   scopes: ["openid", "profile", "offline_access", "User.Read.All", "Files.ReadWrite.All", "Sites.Read.All", "FileStorageContainer.Selected"]
   
 });

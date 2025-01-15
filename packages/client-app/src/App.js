@@ -49,7 +49,7 @@ function App() {
     const msalConfig = {
       auth: {
         clientId: process.env.REACT_APP_CLIENT_ID,
-        authority: `https://login.microsoftonline.com/1a96daa0-6b95-4b94-988e-72d794968773/`,
+        authority: `https://login.microsoftonline.com/${process.env.REACT_APP_TENANT_ID}/`,
       },
       cache: {
         cacheLocation: 'localStorage',

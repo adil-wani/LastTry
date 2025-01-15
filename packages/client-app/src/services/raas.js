@@ -169,7 +169,7 @@ export default class RaaS {
     const msalConfig = {
       auth: {
         clientId: process.env.REACT_APP_CLIENT_ID,
-        authority: `https://login.microsoftonline.com/1a96daa0-6b95-4b94-988e-72d794968773/`,
+        authority: `https://login.microsoftonline.com/${process.env.REACT_APP_TENANT_ID}/`,
       },
       cache: {
         cacheLocation: "localStorage", // This configures where  cache will be stored
@@ -178,7 +178,7 @@ export default class RaaS {
     }
     const scopes = {
       scopes: [
-        `api://${process.env.REACT_APP_CLIENT_ID || 'e284a7d5-9b4d-4d5f-8343-c8e3dc079c05'}/Container.Manage`
+        `api://${process.env.REACT_APP_CLIENT_ID}/Container.Manage`
       ],
       prompt: "select_account",
       redirectUri: "/"

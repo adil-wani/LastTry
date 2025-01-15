@@ -4,16 +4,8 @@
     "applicationInsights": {
       "samplingSettings": {
         "isEnabled": true,
-        "excludedTypes": "Request",
-        "percentage": 50
-      },
-      "enableDependencyTracking": true
-    },
-    "logLevels": {
-      "default": "Information",
-      "Function.HttpTrigger1": "Warning",
-      "Function.ListContainers": "Warning",
-      "Host": "Error"
+        "excludedTypes": "Request"
+      }
     }
   },
   "extensionBundle": {

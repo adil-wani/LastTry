@@ -15,5 +15,5 @@
     "jwks-rsa": "^3.1.0"
   },
 
-  "main": "src/{index.js,functions/*.js}"
+  "main": "src/{index.js,funcs/*.js}"
 }

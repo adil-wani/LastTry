@@ -92,9 +92,9 @@ function App() {
         <Stack.Item align="stretch">
           <Stack.Item>
             <br />
-            <Text variant="xLarge">Sample SharePoint Embedded App</Text>
+            <Text variant="xLarge">SharePoint Embedded App POC</Text>
             <br />
-            <Text>Built with &#128151; using React, FluentUI, Microsoft Graph Toolkit, and <b>SharePoint Embedded!</b></Text>
+            <Text><b>Microsoft SharePoint Embedded is an API-based solution that integrates Microsoft 365's file and document management capabilities into any application.</b></Text>
             <br />
             <Login loginCompleted={promptForContainerConsent} />
           </Stack.Item>
